@@ -17,9 +17,10 @@
     "mobileDefaultViewerMode": "2d",
     "experimentalFeatures": true,
     "languageConfiguration": {
-      "enabled": false,
+      "enabled": true,
       "debug": false,
       "languages": {
+        "ko": "한국어",
         "en": "English"
       },
       "fallbackLanguage": "en"
