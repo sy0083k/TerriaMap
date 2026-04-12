@@ -1,0 +1,27 @@
+{
+  "homeCamera": {
+    "north": 38.75,
+    "east": 131.87,
+    "south": 33.1,
+    "west": 124.4
+  },
+  "catalog": [
+    {
+      "id": "vworld-example-group",
+      "type": "group",
+      "name": "Local Example Data",
+      "members": [
+        {
+          "id": "vworld-api-placeholder",
+          "type": "csv",
+          "name": "Replace with your local VWorld-backed item",
+          "description": "Copy this file to simple.json and replace placeholder values with your local configuration.",
+          "url": "data:text/csv;charset=utf-8,longitude,latitude,name%0A127.0,37.5,Configure%20VWorld%20API%20Locally"
+        }
+      ]
+    }
+  ],
+  "vworld": {
+    "apiKey": "YOUR_VWORLD_API_KEY"
+  }
+}
