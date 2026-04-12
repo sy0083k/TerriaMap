@@ -1,9 +1,9 @@
 {
   "homeCamera": {
-    "west": 124,
-    "south": 33,
-    "east": 132,
-    "north": 39
+    "west": 126.440784,
+    "south": 36.774417,
+    "east": 126.463216,
+    "north": 36.792383
   },
   "viewerMode": "3dSmooth",
   "baseMaps": {
