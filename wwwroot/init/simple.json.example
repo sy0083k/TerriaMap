@@ -1,27 +1,64 @@
 {
   "homeCamera": {
-    "north": 38.75,
-    "east": 131.87,
-    "south": 33.1,
-    "west": 124.4
+    "west": 124,
+    "south": 33,
+    "east": 132,
+    "north": 39
+  },
+  "viewerMode": "3dSmooth",
+  "baseMaps": {
+    "items": [
+      {
+        "item": {
+          "id": "wmts-vworld-satellite",
+          "name": "VWorld Satellite",
+          "type": "wmts",
+          "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
+          "layer": "Satellite",
+          "attribution": "VWorld",
+          "opacity": 1
+        },
+        "image": "build/TerriaJS/images/Australia.png"
+      }
+    ],
+    "enabledBaseMaps": ["wmts-vworld-satellite", "basemap-openstreetmap"],
+    "defaultBaseMapId": "wmts-vworld-satellite",
+    "previewBaseMapId": "wmts-vworld-satellite"
   },
   "catalog": [
     {
-      "id": "vworld-example-group",
+      "id": "starter-group",
       "type": "group",
-      "name": "Local Example Data",
+      "name": "Starter Catalog",
+      "isOpen": true,
       "members": [
         {
-          "id": "vworld-api-placeholder",
-          "type": "csv",
-          "name": "Replace with your local VWorld-backed item",
-          "description": "Copy this file to simple.json and replace placeholder values with your local configuration.",
-          "url": "data:text/csv;charset=utf-8,longitude,latitude,name%0A127.0,37.5,Configure%20VWorld%20API%20Locally"
+          "id": "ne-countries",
+          "type": "geojson",
+          "name": "World Countries",
+          "url": "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"
+        },
+        {
+          "id": "vworld-wms-api2",
+          "type": "wms-group",
+          "name": "브이월드 WMS",
+          "url": "https://api.vworld.kr/req/wms?KEY=YOUR_VWORLD_API_KEY&DOMAIN=YOUR_LOCAL_DOMAIN",
+          "getCapabilitiesUrl": "https://api.vworld.kr/req/wms?SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.3.0&KEY=YOUR_VWORLD_API_KEY&DOMAIN=YOUR_LOCAL_DOMAIN",
+          "isOpen": false,
+          "itemProperties": {
+            "attribution": "VWorld",
+            "crs": "EPSG:3857",
+            "keepOnTop": true,
+            "zoomOnAddToWorkbench": false,
+            "parameters": {
+              "transparent": true,
+              "format": "image/png",
+              "version": "1.3.0",
+              "exceptions": "text/xml"
+            }
+          }
         }
       ]
     }
-  ],
-  "vworld": {
-    "apiKey": "YOUR_VWORLD_API_KEY"
-  }
+  ]
 }

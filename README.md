@@ -12,7 +12,7 @@ For instructions on how to deploy your map, see [the documentation here](doc/dep
 
 `wwwroot/init/simple.json` is treated as a local-only file so API keys do not get committed.
 
-Before running the app, copy `wwwroot/init/simple.json.example` to `wwwroot/init/simple.json` and fill in any local secrets such as your VWorld API key.
+Before running the app, copy `wwwroot/init/simple.json.example` to `wwwroot/init/simple.json`, then replace `YOUR_VWORLD_API_KEY` and `YOUR_LOCAL_DOMAIN` with your local values.
 
 To get in touch:
 
