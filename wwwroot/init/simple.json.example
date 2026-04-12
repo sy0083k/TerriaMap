@@ -16,7 +16,13 @@
           "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
           "layer": "Satellite",
           "attribution": "VWorld",
-          "opacity": 1
+          "opacity": 1,
+          "rectangle": {
+            "west": 124.0,
+            "south": 33.0,
+            "east": 132.0,
+            "north": 38.7
+          }
         },
         "image": "build/TerriaJS/images/Australia.png"
       }
