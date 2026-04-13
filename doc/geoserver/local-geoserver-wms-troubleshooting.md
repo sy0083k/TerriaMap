@@ -236,3 +236,4 @@ GeoServer 자체 설치와 최초 접속 오류 해결이 필요하면 [WSL2 Ubu
 GeoServer에서 Shapefile을 이용해 WMS 레이어를 처음 등록하는 절차가 필요하면 [GeoServer에서 Shapefile로 WMS 레이어 추가하기](./add-wms-layer-from-shapefile.md)를 먼저 본다.
 
 GeoServer에서 레이어 스타일을 만들고 한글 속성값 필터 문제를 점검하려면 [GeoServer에서 WMS 레이어 스타일링과 한글 속성값 문제 해결](./style-wms-layer-and-fix-korean-attribute-filter.md)을 참고한다.
+>>>>>>> ddffa4ca (Add GeoServer WMS troubleshooting guide)
