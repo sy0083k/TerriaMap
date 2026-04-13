@@ -8,11 +8,13 @@ This is a complete website built using the TerriaJS library. See the [TerriaJS R
 
 For instructions on how to deploy your map, see [the documentation here](doc/deploying/deploying-to-aws.md).
 
-## Local init configuration
+## Local configuration
 
-`wwwroot/init/simple.json` is treated as a local-only file so API keys do not get committed.
+`wwwroot/config.json` and `wwwroot/init/simple.json` are treated as local-only files so API keys do not get committed.
 
-Before running the app, copy `wwwroot/init/simple.json.example` to `wwwroot/init/simple.json`, then replace `YOUR_VWORLD_API_KEY` and `YOUR_LOCAL_DOMAIN` with your local values.
+Before running the app, copy `wwwroot/config.json.example` to `wwwroot/config.json`, then replace `YOUR_VWORLD_API_KEY` in the `vworld-search-provider` entry.
+
+Then copy `wwwroot/init/simple.json.example` to `wwwroot/init/simple.json`, and replace `YOUR_VWORLD_API_KEY` and `YOUR_LOCAL_DOMAIN` with your local values.
 
 To get in touch:
 

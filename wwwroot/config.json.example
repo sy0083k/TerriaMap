@@ -1,0 +1,43 @@
+{
+  "initializationUrls": ["simple"],
+  "parameters": {
+    "appName": "TerriaMap Starter",
+    "supportEmail": "help@example.com",
+    "disclaimer": {
+      "text": "Starter deployment for TerriaMap. Do not use for navigation or precise spatial analysis.",
+      "url": ""
+    },
+    "brandBarElements": [
+      "",
+      "<a target=\"_blank\" rel=\"noreferrer\" href=\"https://terria.io\"><img src=\"images/terria_logo.png\" height=\"52\" title=\"Version: {{version}}\" /></a>",
+      ""
+    ],
+    "proj4ServiceBaseUrl": "proj4def/",
+    "feedbackUrl": "feedback",
+    "mobileDefaultViewerMode": "2d",
+    "experimentalFeatures": true,
+    "languageConfiguration": {
+      "enabled": true,
+      "debug": false,
+      "languages": {
+        "ko": "한국어",
+        "en": "English"
+      },
+      "fallbackLanguage": "en"
+    },
+    "searchBarConfig": {},
+    "searchProviders": [
+      {
+        "id": "search-provider/vworld",
+        "type": "vworld-search-provider",
+        "name": "브이월드 주소 검색",
+        "url": "https://api.vworld.kr/req/search",
+        "key": "YOUR_VWORLD_API_KEY",
+        "category": "PARCEL",
+        "useProxy": true,
+        "flightDurationSeconds": 1.5,
+        "minCharacters": 3
+      }
+    ]
+  }
+}
