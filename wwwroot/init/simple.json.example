@@ -5,31 +5,25 @@
     "east": 126.463216,
     "north": 36.792383
   },
-  "viewerMode": "3dSmooth",
+  "viewerMode": "2D",
   "baseMaps": {
     "items": [
       {
         "item": {
-          "id": "wmts-vworld-satellite",
-          "name": "VWorld Satellite",
+          "id": "basemap-vworld-satellite",
+          "name": "브이월드 영상",
           "type": "wmts",
           "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
           "layer": "Satellite",
           "attribution": "VWorld",
-          "opacity": 1,
-          "rectangle": {
-            "west": 124.0,
-            "south": 33.0,
-            "east": 132.0,
-            "north": 38.7
-          }
+          "opacity": 1
         },
         "image": "build/TerriaJS/images/Australia.png"
       }
     ],
-    "enabledBaseMaps": ["wmts-vworld-satellite", "basemap-openstreetmap"],
-    "defaultBaseMapId": "wmts-vworld-satellite",
-    "previewBaseMapId": "wmts-vworld-satellite"
+    "enabledBaseMaps": ["basemap-vworld-satellite", "basemap-openstreetmap"],
+    "defaultBaseMapId": "basemap-vworld-satellite",
+    "previewBaseMapId": "basemap-vworld-satellite"
   },
   "catalog": [
     {
