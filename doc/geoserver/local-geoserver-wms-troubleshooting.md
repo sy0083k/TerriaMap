@@ -226,3 +226,13 @@ fc-cache -f -v
 1. `GetCapabilities` 가 실제로 열리는지 확인
 2. 깨진 문자열 모양으로 인코딩/폰트 문제를 구분
 3. 범례만 깨지면 `GetLegendGraphic` 과 GeoServer 폰트를 우선 점검
+
+---
+
+## 함께 보면 좋은 문서
+
+GeoServer 자체 설치와 최초 접속 오류 해결이 필요하면 [WSL2 Ubuntu에서 GeoServer 설치 및 최초 접속 오류 해결](./install-geoserver-on-wsl2-and-fix-first-run.md)을 먼저 본다.
+
+GeoServer에서 Shapefile을 이용해 WMS 레이어를 처음 등록하는 절차가 필요하면 [GeoServer에서 Shapefile로 WMS 레이어 추가하기](./add-wms-layer-from-shapefile.md)를 먼저 본다.
+
+GeoServer에서 레이어 스타일을 만들고 한글 속성값 필터 문제를 점검하려면 [GeoServer에서 WMS 레이어 스타일링과 한글 속성값 문제 해결](./style-wms-layer-and-fix-korean-attribute-filter.md)을 참고한다.
