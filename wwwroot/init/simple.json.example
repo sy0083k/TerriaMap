@@ -10,6 +10,30 @@
     "items": [
       {
         "item": {
+          "id": "basemap-vworld-base",
+          "name": "브이월드 일반",
+          "type": "wmts",
+          "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
+          "layer": "Base",
+          "attribution": "VWorld",
+          "opacity": 1
+        },
+        "image": "build/TerriaJS/images/Australia.png"
+      },
+      {
+        "item": {
+          "id": "basemap-vworld-white",
+          "name": "브이월드 백지도",
+          "type": "wmts",
+          "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
+          "layer": "white",
+          "attribution": "VWorld",
+          "opacity": 1
+        },
+        "image": "build/TerriaJS/images/Australia.png"
+      },
+      {
+        "item": {
           "id": "basemap-vworld-satellite",
           "name": "브이월드 영상",
           "type": "wmts",
@@ -19,9 +43,43 @@
           "opacity": 1
         },
         "image": "build/TerriaJS/images/Australia.png"
+      },
+      {
+        "item": {
+          "id": "basemap-vworld-hybrid",
+          "name": "브이월드 하이브리드",
+          "type": "composite",
+          "members": [
+            {
+              "id": "basemap-vworld-hybrid-overlay",
+              "name": "브이월드 하이브리드 - 오버레이",
+              "type": "wmts",
+              "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
+              "layer": "Hybrid",
+              "attribution": "VWorld",
+              "opacity": 1
+            },
+            {
+              "id": "basemap-vworld-hybrid-satellite",
+              "name": "브이월드 하이브리드 - 영상",
+              "type": "wmts",
+              "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
+              "layer": "Satellite",
+              "attribution": "VWorld",
+              "opacity": 1
+            }
+          ]
+        },
+        "image": "build/TerriaJS/images/Australia.png"
       }
     ],
-    "enabledBaseMaps": ["basemap-vworld-satellite", "basemap-openstreetmap"],
+    "enabledBaseMaps": [
+      "basemap-vworld-base",
+      "basemap-vworld-white",
+      "basemap-vworld-satellite",
+      "basemap-vworld-hybrid",
+      "basemap-openstreetmap"
+    ],
     "defaultBaseMapId": "basemap-vworld-satellite",
     "previewBaseMapId": "basemap-vworld-satellite"
   },
