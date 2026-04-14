@@ -33,3 +33,5 @@ package-lock.json
 .nvmrc
 
 .codex
+
+doc/korea-customization-branch-review.md
