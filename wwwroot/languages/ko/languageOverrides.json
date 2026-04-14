@@ -1,4 +1,7 @@
 {
+  "addData": {
+    "addDataBtnText": "데이터 탐색"
+  },
   "viewModels": {
     "vworldApiKeyMissing": "VWorld API 키가 설정되지 않았습니다. config.json의 searchProvider.key를 확인하세요."
   }
