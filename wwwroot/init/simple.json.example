@@ -15,6 +15,12 @@
           "type": "wmts",
           "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
           "layer": "Base",
+          "rectangle": {
+            "west": 120,
+            "south": 30,
+            "east": 135,
+            "north": 43
+          },
           "attribution": "VWorld",
           "opacity": 1
         },
@@ -27,6 +33,12 @@
           "type": "wmts",
           "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
           "layer": "white",
+          "rectangle": {
+            "west": 120,
+            "south": 30,
+            "east": 135,
+            "north": 43
+          },
           "attribution": "VWorld",
           "opacity": 1
         },
@@ -39,6 +51,12 @@
           "type": "wmts",
           "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
           "layer": "Satellite",
+          "rectangle": {
+            "west": 120,
+            "south": 30,
+            "east": 135,
+            "north": 43
+          },
           "attribution": "VWorld",
           "opacity": 1
         },
@@ -56,6 +74,12 @@
               "type": "wmts",
               "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
               "layer": "Hybrid",
+              "rectangle": {
+                "west": 120,
+                "south": 30,
+                "east": 135,
+                "north": 43
+              },
               "attribution": "VWorld",
               "opacity": 1
             },
@@ -65,6 +89,12 @@
               "type": "wmts",
               "url": "https://api.vworld.kr/req/wmts/1.0.0/YOUR_VWORLD_API_KEY/WMTSCapabilities.xml",
               "layer": "Satellite",
+              "rectangle": {
+                "west": 120,
+                "south": 30,
+                "east": 135,
+                "north": 43
+              },
               "attribution": "VWorld",
               "opacity": 1
             }
