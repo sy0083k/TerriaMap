@@ -81,7 +81,8 @@ export default class VWorldSearchProvider extends LocationSearchProviderMixin(
 
     if (!this.key || this.key === "") {
       searchResults.message = {
-        content: "translate#viewModels.searchErrorOccurred"
+        content:
+          "VWorld API 키가 설정되지 않았습니다. config.json에서 searchProvider.key를 확인하세요."
       };
       return;
     }
@@ -107,6 +108,10 @@ export default class VWorldSearchProvider extends LocationSearchProviderMixin(
       }
 
       if (payload.status !== "OK") {
+        if (payload.status === "ERROR") {
+          const errorDetail = payload.error?.text ?? "알 수 없는 오류";
+          console.error(`VWorld 검색 API 오류: ${errorDetail}`);
+        }
         searchResults.message = {
           content:
             payload.status === "NOT_FOUND"
@@ -184,6 +189,7 @@ export default class VWorldSearchProvider extends LocationSearchProviderMixin(
   }
 
   private itemToSearchResult(item: VWorldAddressItem) {
+    // VWorld API 응답은 EPSG:4326(WGS84) 좌표계를 사용: x = 경도(longitude), y = 위도(latitude)
     const longitude = this.parseCoordinate(item.point?.x);
     const latitude = this.parseCoordinate(item.point?.y);
 
