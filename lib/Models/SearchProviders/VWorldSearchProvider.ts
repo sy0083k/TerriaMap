@@ -11,6 +11,7 @@ import SearchProviderResults from "terriajs/lib/Models/SearchProviders/SearchPro
 import SearchResult from "terriajs/lib/Models/SearchProviders/SearchResult";
 import Terria from "terriajs/lib/Models/Terria";
 import VWorldSearchProviderTraits from "../../Traits/SearchProviders/VWorldSearchProviderTraits";
+import { highlightParcelBoundary } from "./VWorldParcelBoundaryUtils";
 
 interface VWorldAddressItem {
   id?: string;
@@ -42,6 +43,10 @@ interface VWorldSearchResponse {
 }
 
 const RESULT_DELTA_DEGREES = 0.01;
+
+class VWorldParcelSearchResult extends SearchResult {
+  pnu?: string;
+}
 
 export default class VWorldSearchProvider extends LocationSearchProviderMixin(
   CreateModel(VWorldSearchProviderTraits)
@@ -206,15 +211,25 @@ export default class VWorldSearchProvider extends LocationSearchProviderMixin(
         ? `${item.address.road}\n${item.address.parcel}`
         : undefined;
 
-    return new SearchResult({
+    const result = new VWorldParcelSearchResult({
       name,
       tooltip,
-      clickAction: createZoomToFunction(this, longitude, latitude),
       location: {
         latitude,
         longitude
       }
     });
+
+    result.pnu = item.id;
+    result.clickAction = createZoomToFunction(
+      this,
+      name,
+      longitude,
+      latitude,
+      result.pnu
+    );
+
+    return result;
   }
 
   private parseCoordinate(value?: number | string) {
@@ -233,8 +248,10 @@ export default class VWorldSearchProvider extends LocationSearchProviderMixin(
 
 function createZoomToFunction(
   model: VWorldSearchProvider,
+  name: string,
   longitude: number,
-  latitude: number
+  latitude: number,
+  pnu?: string
 ) {
   const rectangle = Rectangle.fromDegrees(
     longitude - RESULT_DELTA_DEGREES,
@@ -245,5 +262,16 @@ function createZoomToFunction(
 
   return function () {
     model.terria.currentViewer.zoomTo(rectangle, model.flightDurationSeconds);
+    void highlightParcelBoundary({
+      terria: model.terria,
+      name,
+      key: model.key!,
+      wfsUrl: model.wfsUrl,
+      useProxy: model.useProxy,
+      longitude,
+      latitude,
+      pnu,
+      flightDurationSeconds: model.flightDurationSeconds
+    });
   };
 }

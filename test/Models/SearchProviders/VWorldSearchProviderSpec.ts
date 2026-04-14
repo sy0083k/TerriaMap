@@ -73,6 +73,7 @@ describe("VWorldSearchProvider", () => {
     expect(result.results[0].name).toBe("충청남도 서산시 성연면 오사리 1634");
     expect(result.results[0].location?.longitude).toBe(126.4481405089845);
     expect(result.results[0].location?.latitude).toBe(36.83139733381893);
+    expect((result.results[0] as any).pnu).toBe("4421036023116340000");
   });
 
   it("Handles not found response", async () => {

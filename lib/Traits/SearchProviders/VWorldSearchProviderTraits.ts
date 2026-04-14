@@ -29,4 +29,11 @@ export default class VWorldSearchProviderTraits extends mixTraits(
       "Whether to send requests through the Terria proxy when the target domain is allowed."
   })
   useProxy: boolean = true;
+
+  @primitiveTrait({
+    type: "string",
+    name: "WFS URL",
+    description: "The VWorld WFS URL used to fetch parcel boundary geometry."
+  })
+  wfsUrl: string = "https://api.vworld.kr/req/wfs";
 }
