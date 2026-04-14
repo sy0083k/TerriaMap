@@ -3,17 +3,11 @@ import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
 import { point as turfPoint } from "@turf/helpers";
 import { polygonToLine } from "@turf/polygon-to-line";
 import { Feature, FeatureCollection, GeoJsonProperties } from "geojson";
-import {
-  CallbackProperty,
-  Color,
-  ColorMaterialProperty,
-  DataSource,
-  Rectangle,
-  Resource
-} from "terriajs-cesium";
+import { Rectangle, Resource } from "terriajs-cesium";
 import loadJson from "terriajs/lib/Core/loadJson";
 import GeoJsonCatalogItem from "terriajs/lib/Models/Catalog/CatalogItems/GeoJsonCatalogItem";
 import CommonStrata from "terriajs/lib/Models/Definition/CommonStrata";
+import GlobeOrMap from "terriajs/lib/Models/GlobeOrMap";
 import { removeMarker } from "terriajs/lib/Models/LocationMarkerUtils";
 import Terria from "terriajs/lib/Models/Terria";
 
@@ -136,7 +130,8 @@ export async function highlightParcelBoundary(
   const [west, south, east, north] = bbox(featureCollection);
   const zoomRectangle = Rectangle.fromDegrees(west, south, east, north);
   await waitForNavigationEnd(
-    request.terria.currentViewer as any,
+    request.terria.currentViewer,
+    request.terria.leaflet?.map,
     zoomRectangle,
     request.flightDurationSeconds ?? 3.0
   );
@@ -145,21 +140,25 @@ export async function highlightParcelBoundary(
     return true;
   }
 
-  if (!prefersReducedMotion()) {
+  if (
+    request.terria.currentViewer.type !== "Cesium" &&
+    !prefersReducedMotion()
+  ) {
     const pulseOverlay = getOrCreateBoundaryOverlay(
       request.terria,
       BOUNDARY_LAYER_IDS.pulse,
       "VWorld Parcel Boundary Pulse"
     );
     request.terria.overlays.add(pulseOverlay);
-    await startPulseAnimation(
-      request.terria,
-      pulseOverlay,
-      lineFeatureCollection
-    );
+    await startPulseAnimation(pulseOverlay, lineFeatureCollection);
   }
 
   return true;
+}
+
+interface ParcelWfsFeatureCollection {
+  type?: string;
+  features?: Feature[];
 }
 
 async function fetchParcelFeatureCollection(
@@ -179,7 +178,7 @@ async function fetchParcelFeatureCollection(
     }
   });
 
-  const response = await loadJson<any>(resource);
+  const response = await loadJson<ParcelWfsFeatureCollection>(resource);
   const features = Array.isArray(response?.features) ? response.features : [];
   const selectedFeature = selectFeature(features, request);
 
@@ -292,42 +291,21 @@ function createStyledFeatureCollection(
 }
 
 async function startPulseAnimation(
-  terria: Terria,
   overlay: GeoJsonCatalogItem,
   featureCollection: FeatureCollection
 ) {
   stopPulseAnimation();
   pulseGeneration++;
   const activeGeneration = pulseGeneration;
-  const isCesiumViewer = terria.currentViewer.type === "Cesium";
 
-  if (isCesiumViewer) {
+  const updatePulse = async () => {
+    if (activeGeneration !== pulseGeneration) return;
     applyOverlayStyle(
       overlay,
       createStyledFeatureCollection(
         featureCollection,
         getPulseStyle(Date.now())
       )
-    );
-    await overlay.loadMapItems(true);
-  }
-
-  const updatePulse = async () => {
-    if (activeGeneration !== pulseGeneration) {
-      return;
-    }
-
-    const pulseStyle = getPulseStyle(Date.now());
-
-    if (isCesiumViewer) {
-      updateCesiumPulseOverlay(overlay);
-      terria.currentViewer.notifyRepaintRequired();
-      return;
-    }
-
-    applyOverlayStyle(
-      overlay,
-      createStyledFeatureCollection(featureCollection, pulseStyle)
     );
     await overlay.loadMapItems(true);
   };
@@ -392,48 +370,19 @@ function prefersReducedMotion() {
   );
 }
 
-function updateCesiumPulseOverlay(overlay: GeoJsonCatalogItem) {
-  const dataSource = getOverlayDataSource(overlay);
-  if (!dataSource) {
-    return;
-  }
+type ZoomableViewer = Pick<GlobeOrMap, "type" | "zoomTo">;
 
-  dataSource.entities.values.forEach((entity) => {
-    if (!entity.polyline) {
-      return;
-    }
-
-    entity.polyline.width = new CallbackProperty(
-      () => getPulseStyle(Date.now()).strokeWidth,
-      false
-    );
-    entity.polyline.material = new ColorMaterialProperty(
-      new CallbackProperty(
-        () => Color.fromCssColorString(getPulseStyle(Date.now()).stroke),
-        false
-      )
-    );
-  });
-}
-
-function getOverlayDataSource(overlay: GeoJsonCatalogItem) {
-  return overlay.mapItems.find((item): item is DataSource => {
-    return typeof (item as DataSource).entities !== "undefined";
-  });
-}
+type LeafletMoveEndSource = {
+  once: (eventName: "moveend", callback: () => void) => void;
+};
 
 async function waitForNavigationEnd(
-  viewer: {
-    type: string;
-    zoomTo: (target: Rectangle, flightDurationSeconds: number) => Promise<void>;
-    map?: {
-      once: (eventName: string, callback: () => void) => void;
-    };
-  },
+  viewer: ZoomableViewer,
+  leafletMap: LeafletMoveEndSource | undefined,
   zoomRectangle: Rectangle,
   flightDurationSeconds: number
 ) {
-  if (viewer.type === "Leaflet" && viewer.map && flightDurationSeconds > 0) {
+  if (viewer.type === "Leaflet" && leafletMap && flightDurationSeconds > 0) {
     const moveEndPromise = new Promise<void>((resolve) => {
       let resolved = false;
       const complete = () => {
@@ -443,7 +392,7 @@ async function waitForNavigationEnd(
         }
       };
 
-      viewer.map!.once("moveend", complete);
+      leafletMap.once("moveend", complete);
       setTimeout(complete, flightDurationSeconds * 1000 + 250);
     });
 
