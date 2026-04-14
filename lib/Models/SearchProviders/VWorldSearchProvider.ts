@@ -81,8 +81,7 @@ export default class VWorldSearchProvider extends LocationSearchProviderMixin(
 
     if (!this.key || this.key === "") {
       searchResults.message = {
-        content:
-          "VWorld API 키가 설정되지 않았습니다. config.json에서 searchProvider.key를 확인하세요."
+        content: "translate#viewModels.vworldApiKeyMissing"
       };
       return;
     }

@@ -105,6 +105,18 @@ describe("VWorldSearchProvider", () => {
     );
   });
 
+  it("Shows translated message when API key is missing", async () => {
+    searchProvider.setTrait(CommonStrata.definition, "key", "");
+
+    const result = searchProvider.search("missing-key");
+    await result.resultsCompletePromise;
+
+    expect(result.results.length).toBe(0);
+    expect(result.message?.content).toBe(
+      "translate#viewModels.vworldApiKeyMissing"
+    );
+  });
+
   it("Handles ERROR status response", async () => {
     worker.use(
       http.get("http://api.test.com", () =>
