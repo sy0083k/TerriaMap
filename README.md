@@ -4,53 +4,53 @@
 
 ![Terria logo](terria-logo.png "Terria logo")
 
-This is a complete website built using the TerriaJS library. See the [TerriaJS README](https://github.com/TerriaJS/TerriaJS) for information about TerriaJS, and getting started using this repository.
+이 저장소는 TerriaJS 라이브러리를 사용해 구축된 완전한 웹사이트입니다. TerriaJS에 대한 정보와 이 저장소를 사용한 시작 방법은 [TerriaJS README](https://github.com/TerriaJS/TerriaJS)를 참고하세요.
 
-For instructions on how to deploy your map, see [the documentation here](doc/deploying/deploying-to-aws.md).
+지도를 배포하는 방법은 [여기 문서](doc/deploying/deploying-to-aws.md)를 참고하세요.
 
-## Local configuration
+## 로컬 설정
 
-`wwwroot/config.json` and `wwwroot/init/simple.json` are treated as local-only files so API keys do not get committed.
+`wwwroot/config.json`과 `wwwroot/init/simple.json`은 API 키가 커밋되지 않도록 로컬 전용 파일로 취급됩니다.
 
-Before running the app, copy `wwwroot/config.json.example` to `wwwroot/config.json`, then replace `YOUR_VWORLD_API_KEY` in the `vworld-search-provider` entry.
+앱을 실행하기 전에 `wwwroot/config.json.example`을 `wwwroot/config.json`으로 복사한 뒤, `vworld-search-provider` 항목의 `YOUR_VWORLD_API_KEY`를 실제 값으로 바꾸세요.
 
-Then copy `wwwroot/init/simple.json.example` to `wwwroot/init/simple.json`, and replace `YOUR_VWORLD_API_KEY` and `YOUR_LOCAL_DOMAIN` with your local values.
+그 다음 `wwwroot/init/simple.json.example`을 `wwwroot/init/simple.json`으로 복사하고, `YOUR_VWORLD_API_KEY`와 `YOUR_LOCAL_DOMAIN`을 로컬 환경에 맞는 값으로 바꾸세요.
 
-To get in touch:
+문의 채널:
 
-- Join the [TerriaJS Github Discussion](https://github.com/TerriaJS/terriajs/discussions)
-- Raise issues in the [TerriaJS Github issue tracker](https://github.com/TerriaJS/terriajs/issues/new)
+- [TerriaJS Github Discussion](https://github.com/TerriaJS/terriajs/discussions)에 참여하기
+- [TerriaJS Github issue tracker](https://github.com/TerriaJS/terriajs/issues/new)에 이슈 등록하기
 
 ---
 
-## Major announcements
+## 주요 공지
 
-Following is a list of major announcements and upgrades that may affect users maintaining a fork (copied from [TerriaJS announcements](https://github.com/TerriaJS/terriajs/discussions/categories/announcements)). For a full list of changes to TerriaMap, including the latest versions of TerriaJS included with each release please refer to [CHANGES.md](https://github.com/TerriaJS/TerriaMap/blob/main/CHANGES.md).
+아래는 포크를 유지보수하는 사용자에게 영향을 줄 수 있는 주요 공지와 업그레이드 목록입니다([TerriaJS announcements](https://github.com/TerriaJS/terriajs/discussions/categories/announcements)에서 가져옴). 각 릴리스에 포함된 최신 TerriaJS 버전을 포함한 TerriaMap 전체 변경 사항은 [CHANGES.md](https://github.com/TerriaJS/TerriaMap/blob/main/CHANGES.md)를 참고하세요.
 
-### We have released TerriaJS v8.3.0 (2023-05-22)
+### TerriaJS v8.3.0 릴리스 (2023-05-22)
 
-Terriajs version `8.3.0` includes a few breaking changes:
+TerriaJS `8.3.0`에는 몇 가지 호환성 영향이 있는 변경 사항이 포함되어 있습니다.
 
     - Upgrade to Typescript version 4.9.x
     - Upgrade to Mobx version 6.9.x
 
-This might affect your map only if it has local model layer modifications like your own custom data provider (aka catalog items). Otherwise you can proceed like any other normal upgrade. For instructions on upgrading your maps with local modiciations please refer to the [upgrade guide](https://github.com/TerriaJS/terriajs/discussions/6787).
+이 변경은 사용자 정의 데이터 제공자(즉, catalog items)처럼 로컬 모델 레이어를 수정한 경우에만 지도에 영향을 줄 수 있습니다. 그런 수정이 없다면 일반적인 업그레이드처럼 진행하면 됩니다. 로컬 수정이 있는 지도를 업그레이드하는 방법은 [upgrade guide](https://github.com/TerriaJS/terriajs/discussions/6787)를 참고하세요.
 
-### PM2 no longer supported (2023-03-21)
+### PM2 지원 종료 (2023-03-21)
 
-We've removed pm2 from our dependencies and no longer ship configuration for running terriajs-server with pm2.
+의존성에서 pm2를 제거했으며, 더 이상 pm2로 terriajs-server를 실행하기 위한 설정을 제공하지 않습니다.
 
-`npm start` now runs in forground because it no longer uses pm2. A new task `gulp dev` has been introduced to make development easier. It runs terriajs-server and starts `gulp watch` - which watches for changes and incrementally builds. See https://github.com/TerriaJS/terriajs/discussions/6731 for more information on why and what to do.
+이제 `npm start`는 pm2를 사용하지 않기 때문에 포그라운드에서 실행됩니다. 개발을 더 쉽게 하기 위해 새 작업인 `gulp dev`가 도입되었습니다. 이 작업은 terriajs-server를 실행하고, 변경 사항을 감시하며 점진적으로 빌드하는 `gulp watch`를 함께 시작합니다. 배경과 대응 방법은 https://github.com/TerriaJS/terriajs/discussions/6731 를 참고하세요.
 
-### We just reformatted our codebase with [Prettier](https://prettier.io/) (2022-08-29)
+### 코드베이스를 [Prettier](https://prettier.io/)로 재포맷함 (2022-08-29)
 
-This may cause large merge conflicts when you merge `main` into your fork. See https://github.com/TerriaJS/terriajs/discussions/6517 for instructions on how to merge this formatting change.
+이 변경으로 `main`을 포크에 병합할 때 큰 merge conflict가 발생할 수 있습니다. 이 포맷 변경을 병합하는 방법은 https://github.com/TerriaJS/terriajs/discussions/6517 를 참고하세요.
 
-### We have released TerriaJS v8 (2021-08-13)
+### TerriaJS v8 릴리스 (2021-08-13)
 
-What this means:
+의미하는 바는 다음과 같습니다.
 
-- [Our new main branch of TerriaMap](https://github.com/TerriaJS/TerriaMap/tree/main) now uses v8+ of TerriaJS
-- [The terriajs7 branch of TerriaMap](https://github.com/TerriaJS/TerriaMap/tree/terriajs7) will use v7 TerriaJS, but will not receive further updates
-- We have a [migration guide](https://docs.terria.io/guide/contributing/migration-guide/) available for users of TerriaJS v7 to help them upgrade their applications to TerriaJS v8
-- Please chat to us and the community in our [GitHub discussions forum](https://github.com/TerriaJS/terriajs/discussions)
+- [TerriaMap의 main 브랜치](https://github.com/TerriaJS/TerriaMap/tree/main)는 이제 TerriaJS v8+를 사용합니다
+- [TerriaMap의 terriajs7 브랜치](https://github.com/TerriaJS/TerriaMap/tree/terriajs7)는 TerriaJS v7을 사용하지만 더 이상 업데이트되지 않습니다
+- TerriaJS v7 사용자가 애플리케이션을 TerriaJS v8로 업그레이드할 수 있도록 [migration guide](https://docs.terria.io/guide/contributing/migration-guide/)를 제공합니다
+- [GitHub discussions forum](https://github.com/TerriaJS/terriajs/discussions)에서 저희와 커뮤니티에 문의해 주세요
