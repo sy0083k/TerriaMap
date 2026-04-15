@@ -8,6 +8,19 @@
 
 지도를 배포하는 방법은 [여기 문서](doc/deploying/deploying-to-aws.md)를 참고하세요.
 
+## korea-customization 브랜치
+
+`korea-customization` 브랜치는 한국 배포 환경에 맞춘 TerriaMap 커스터마이징을 포함합니다. 이 브랜치에서는 기본 TerriaMap 설정 위에 한국형 지도 서비스와 현지화 관련 구성을 추가했습니다.
+
+주요 추가 사항:
+
+- VWorld 주소 검색 제공자 추가
+- VWorld 기반 베이스맵 및 WMS 예시 설정 추가
+- 한국어 UI 번역 및 언어 설정 보강
+- GeoServer 연동 및 문제 해결 문서 추가
+
+브랜치별 상세 변경 사항과 설정 차이는 [korea-customization 브랜치 변경 사항](doc/korea-customization.md)을 참고하세요.
+
 ## 로컬 설정
 
 `wwwroot/config.json`과 `wwwroot/init/simple.json`은 API 키가 커밋되지 않도록 로컬 전용 파일로 취급됩니다.
@@ -15,6 +28,14 @@
 앱을 실행하기 전에 `wwwroot/config.json.example`을 `wwwroot/config.json`으로 복사한 뒤, `vworld-search-provider` 항목의 `YOUR_VWORLD_API_KEY`를 실제 값으로 바꾸세요.
 
 그 다음 `wwwroot/init/simple.json.example`을 `wwwroot/init/simple.json`으로 복사하고, `YOUR_VWORLD_API_KEY`와 `YOUR_LOCAL_DOMAIN`을 로컬 환경에 맞는 값으로 바꾸세요.
+
+관련 문서:
+
+- [korea-customization 브랜치 변경 사항](doc/korea-customization.md)
+- [GeoServer에서 shapefile WMS 추가](doc/geoserver/add-wms-layer-from-shapefile.md)
+- [WSL2에서 GeoServer 설치 및 첫 실행 문제 해결](doc/geoserver/install-geoserver-on-wsl2-and-fix-first-run.md)
+- [로컬 GeoServer WMS 문제 해결](doc/geoserver/local-geoserver-wms-troubleshooting.md)
+- [WMS 스타일링 및 한글 필터 문제 해결](doc/geoserver/style-wms-layer-and-fix-korean-attribute-filter.md)
 
 문의 채널:
 
