@@ -10,6 +10,7 @@ version.json
 wwwroot/init/nm.json
 wwwroot/config.json
 wwwroot/init/simple.json
+wwwroot/mockServiceWorker.js
 datasources/00_National_Data_Sets.json
 .DS_Store
 .localized

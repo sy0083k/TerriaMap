@@ -278,6 +278,48 @@ function checkForDuplicateCesium() {
 
 gulp.task("terriajs-server", terriajsServerGulpTask(3001));
 
+// ---------------------------------------------------------------------------
+// Test tasks
+// ---------------------------------------------------------------------------
+
+function buildSpecs(done) {
+  var runWebpack = require("terriajs/buildprocess/runWebpack.js");
+  var webpack = require("webpack");
+  var fse = require("fs-extra");
+
+  // Make MSW service worker accessible at /mockServiceWorker.js during tests
+  var mswPkg = path.dirname(require.resolve("msw/package.json"));
+  fse.copySync(
+    path.join(mswPkg, "lib", "mockServiceWorker.js"),
+    path.join(__dirname, "wwwroot", "mockServiceWorker.js")
+  );
+
+  var webpackConfig = require("./buildprocess/webpack.config.specs.js")(true);
+  runWebpack(webpack, webpackConfig, done);
+}
+
+async function runJasmineBrowser() {
+  var { runSpecs } = require("jasmine-browser-runner");
+  var config = (await import("./buildprocess/jasmine-browser.mjs")).default;
+  await runSpecs(config);
+}
+
+function runTests(done) {
+  runJasmineBrowser().then(
+    function () {
+      done();
+    },
+    function (e) {
+      done(e);
+    }
+  );
+}
+
+gulp.task("build-specs", buildSpecs);
+gulp.task("test", gulp.series("build-specs", runTests));
+
+// ---------------------------------------------------------------------------
+
 gulp.task("build", gulp.series("copy-terriajs-assets", "build-app"));
 gulp.task("release", gulp.series("copy-terriajs-assets", "release-app"));
 gulp.task("watch", gulp.parallel("watch-terriajs-assets", "watch-app"));
